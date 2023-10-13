@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp6pbep5ataqk"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_xgvu7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q0b1a"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_igdva"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pqg3q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tfj2q"]
+
+[node name="World" type="Node3D"]
+
+[node name="World" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World"]
+mesh = SubResource("BoxMesh_q0b1a")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World"]
+shape = SubResource("BoxShape3D_igdva")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62618, 0)
+script = ExtResource("1_xgvu7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_pqg3q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_tfj2q")
+
+[node name="CameraPivot" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525914, -0.224458)
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0248787, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.636146, 0.771569, 0, -0.771569, 0.636146, 0, 27.8834, -75.0238)
+light_color = Color(0.956863, 0.988235, 0.917647, 1)
+light_energy = 2.219
+light_indirect_energy = 1.457
+shadow_enabled = true
+shadow_blur = 2.818
+directional_shadow_mode = 1
